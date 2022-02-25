@@ -1,0 +1,8 @@
+command /discord:
+    trigger:
+        send "&8&m-----------------------------------------------------" to player
+        send "&e             &aDiscord'a &7katılarak arkadaşlarınla sohbet et!" to player
+        send "&e            &7veya arkadaşlarınla sohbet ederek oynayabilirsin!" to player
+        send "&e" to player
+        send "&e                                 <link:https://discord.gg/xxxxxxx>&a&nTıkla ve Discord'a katıl!&c ❤<reset> " to player
+        send "&8&m-----------------------------------------------------" to player
