@@ -1,0 +1,43 @@
+command /prototype-antimacro [<text>]:
+    permission: prototype.admin
+    trigger:
+        if arg-1 isn't set:
+            send "&3-------------------------------" to player
+            send "&3Aktif et: /prototype-antimacro aç" to player
+            send "&3Deaktif et: /prototype-antimacro kapat" to player
+            send "&3Durum: %{antimacro}%"
+            send "&3-------------------------------" to player
+        if arg-1 is "aç":
+            if {antimacro} is "Aktif":
+                send "&3[Prototype] &8» &3Zaten açık!" to player
+            else:
+                set {antimacro} to "Aktif"
+                send "&3[Prototype] &8» &3Makro koruması &2aktif &3edildi." to player
+        if arg-1 is "kapat":
+            if {antimacro} is "Deaktif":
+                send "&3[Prototype] &8» &3Zaten kapalı!"
+            else:
+                set {antimacro} to "Deaktif"
+                send "&3[Prototype] &8» &3Makro koruması &4deaktif &3edildi." to player
+      
+every 2 seconds:
+    loop all players:
+        if {antimacroclicks.%loop-player%} > 40:
+            if {antimacro} is "Aktif":
+                if loop-player have permission "prototype.admin":
+                    send "&3[Prototype] &8» &3Makro kullandığını tespit ettim fakat yetin olduğu için birşey yapmadım." to loop-player
+                else:
+                    kick loop-player due to "&3[Prototype] &8» &3Makro tespit edildi."
+        set {antimacroclicks.%loop-player%} to 0
+      
+on left click:
+    if {antimacro} is "Aktif":
+        add 1 to {antimacroclicks.%player%}
+      
+on load:
+    if {antimacro} isn't set:
+        set {antimacro} to "Aktif"
+      
+on join:
+    set {antimacroclicks.%player%} to 0
+    
